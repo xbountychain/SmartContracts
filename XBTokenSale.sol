@@ -38,73 +38,13 @@ library SafeMath {
  */
 contract ERC20Basic {
     uint256 public totalSupply;
-    function balanceOf(address who) public constant returns (uint256);
-    function transfer(address to, uint256 value) public returns (bool);
+    mapping(address => uint256) balances;
+    function balanceOf(address _owner) public constant returns (uint256) { return balances[_owner]; }
+    //Transfer is disabled
+    //function transfer(address to, uint256 value) public returns (bool);
     event Transfer(address indexed from, address indexed to, uint256 value);
 }
 
-
-/**
- * @title ERC20 interface
- * @dev see https://github.com/ethereum/EIPs/issues/20
- */
-contract ERC20 is ERC20Basic {
-    function allowance(address owner, address spender) public constant returns (uint256);
-    function transferFrom(address from, address to, uint256 value) public returns (bool);
-    function approve(address spender, uint256 value) public returns (bool);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
-}
-
-/**
- * @title Non Tradable Token
- * @author Jitendra Chittoda <jitendra@chittoda.com>
- * @dev Non Tradable ERC20 token
- */
-contract NonTradableToken is ERC20 {
-
-    using SafeMath for uint256;
-    mapping(address => uint256) balances;
-
-    bool public constant isTradable = false;
-
-    /**
-     * transfer method call disabled
-     */
-    function transfer(address _to, uint256 _value) public returns (bool) {
-        require(isTradable);
-    }
-
-    /**
-     * transferFrom method call disabled
-     */
-    function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
-        require(isTradable);
-    }
-
-    /**
-     * approve method call disabled
-    */
-    function approve(address _spender, uint256 _value) public returns (bool) {
-        require(isTradable);
-    }
-
-    /**
-     * allowance method call disabled
-    */
-    function allowance(address _owner, address _spender) public constant returns (uint256 remaining) {
-        return 0;
-    }
-
-    /**
-    * @dev Gets the balance of the specified address.
-    * @param _owner The address to query the the balance of.
-    * @return An uint256 representing the amount owned by the passed address.
-    */
-    function balanceOf(address _owner) public constant returns (uint256 balance) {
-        return balances[_owner];
-    }
-
-}
 
 /**
  * @title Ownable
@@ -190,8 +130,9 @@ contract Pausable is Ownable {
 }
 
 
-contract XBTokenSale is NonTradableToken, Pausable {
+contract XBTokenSale is ERC20Basic, Pausable {
 
+    using SafeMath for uint256;
     string public constant name = "XB Token";
     string public constant symbol = "XB";
     uint256 public constant decimals = 18;
