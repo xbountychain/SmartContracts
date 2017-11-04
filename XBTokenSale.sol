@@ -144,7 +144,7 @@ contract XBTokenSale is ERC20Basic, Pausable {
     uint256 public constant TOTAL_XB_TOKEN_FOR_PRE_SALE = 2640000 * (10**decimals); //2,640,000 * 10^decimals
 
     // how many token units a buyer gets per ETH
-    uint256 public rate = 1400; //1400 XB tokens per ETH, including 40% discount
+    uint256 public rate = 1250; //1250 XB tokens per ETH, including 25% discount
 
     // How many sold in PreSale
     uint256 public presaleSoldTokens = 0;
