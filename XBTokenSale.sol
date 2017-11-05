@@ -1,5 +1,8 @@
 pragma solidity ^0.4.16;
-
+/**
+ * @title xBounty Pre-seed token salet ICO Smart Contract.
+ * @author jitendra@chittoda.com
+ */
 /**
  * @title SafeMath
  * @dev Math operations with safety checks that throw on error
