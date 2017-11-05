@@ -1,6 +1,6 @@
 pragma solidity ^0.4.16;
 /**
- * @title xBounty Pre-seed token salet ICO Smart Contract.
+ * @title xBounty Pre-seed token sale ICO Smart Contract.
  * @author jitendra@chittoda.com
  */
 /**
